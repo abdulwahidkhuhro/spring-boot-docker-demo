@@ -1,9 +1,11 @@
-FROM openjdk:17-jdk-slim
+FROM maven:3.6.3-jdk-8
 
 WORKDIR /app
 
-COPY target/java-docker-demo.jar app.jar
+COPY . .
+
+RUN mvn clean package -DskipTests
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "target/springboot-docker-demo.jar"]
